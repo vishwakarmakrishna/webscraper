@@ -7,6 +7,9 @@ const PORT = 3000;
 
 const path = require('path');
 
+// use .env file
+require('dotenv').config();
+
 // Serve static files (HTML, CSS, JavaScript)
 app.use(express.static(path.join(__dirname, 'public')));
 app.get('/dart', async (req, res) => {
@@ -72,8 +75,9 @@ app.get('/dart', async (req, res) => {
 
 app.get('/job-search', async (req, res) => {
     const query = req.query.q; // Get the search query from the request
-    const cx = '67498ec0151de4b0c'; // Replace with your Custom Search Engine ID
-    const apiKey = 'AIzaSyAouw8ddSrRvGUE-PUSxeDb3Aq_XNiLmdE'; // Replace with your Google API key
+    // use .env file
+    const cx = process.env.cx; // Replace with your own CX value
+    const apiKey = process.env.apiKey; // Replace with your own API key
 
     const apiUrl = `https://www.googleapis.com/customsearch/v1?q=${query}&cx=${cx}&key=${apiKey}`;
 
